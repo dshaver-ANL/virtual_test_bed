@@ -1,15 +1,15 @@
 # Conjugate heat transfer simulation of a 67-pebble core
 
-Contact: Dillon Shaver (dshaver@anl.gov)
+*Contact: John Acierno (Penn State), Dillon Shaver (dshaver.at.anl.gov), and April Novak (anovak.at.anl.gov)* 
 
-In this tutorial we are going to set up and simulate a simple conjugate heat transfer (CHT) case using a helium (Pr=0.71) cooled 67-pebble bed.
-This case will couple NekRS and MOOSE's CHT module using CARDINAL as a wrapper. 
+In this tutorial we are going to set up and simulate a simple [!ac](CHT) case using a helium (Pr=0.71) cooled 67-pebble bed.
+This tutorial was developed from an example case provided with NekRS and couples to MOOSE's [!ac](CHT) module using CARDINAL as a wrapper. 
 More information about the NEAMS tool CARDINAL can be found on [github](https://github.com/neams-th-coe/cardinal), or on the [Cardinal website](https://cardinal.cels.anl.gov/).
 In each time step MOOSE will solve the energy equation in the the solid subdomain and pass the solution to NekRS, which will in-turn solve both the Navier-Stokes and energy equations in the fluid subdomain.
 NekRS will then pass its temperature solve back to MOOSE in the next time step. 
 This transfer of information occurs at the boundary between solid and fluid subdomains, which are the pebble surfaces in this case.
 
-This tutorial was developed from an example case provided with NekRS.
+!include CardinalandMOOSE.md
 
 # Geometry and computational model
 
@@ -23,26 +23,39 @@ A cross section of the fluid domain is shown in [pb67geom] where the fluid is th
        id=pb67geom
        caption=A cross section of the fluid domain for the 67 pebble geometry.
 
-NekRS is used to solve the dimensionless Navier-Stokes equations in the fluid domain
+## NekRS
 
-\begin{equation}
-\label{eq:mass}
-\nabla\cdot\mathbf u=0
-\end{equation}
+!include nekrs_dimless.md
 
-\begin{equation}
-\label{eq:momentum}
-\frac{\partial\mathbf u}{\partial t}+\mathbf u\cdot\nabla\mathbf u=-\nabla P+\frac{1}{Re}\nabla^2\mathbf u
-\end{equation}
+!include nekrs_LES.md
 
-\begin{equation}
-\label{eq:energy}
-\frac{\partial T_f}{\partial t}+\mathbf u\cdot\nabla T_f=\frac{1}{Re Pr}\nabla^2T_f
-\end{equation}
+## Heat Conduction Model
+
+!include steady_hc.md
+
+# Case Setup
+
+
+
+## NekRS setup
+
+### oudf file
+
+### udf file
+
+### par file
+
+### usr file
+
+## MOOSE setup
 
 # Results
 
- 
+!media pb67/pb67_3D_renderings.png
+  style=width:70%;margin-left:auto;margin-right:auto
+  id=pb673D
+  caption=3D volumetric renderings done in VisIt of the velocity (left) and the temperature (right) fields. 
+
 
 
 !alert note
