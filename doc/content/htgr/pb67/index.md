@@ -37,7 +37,18 @@ A cross section of the fluid domain is shown in [pb67geom] where the fluid is th
 
 ### NekRS setup
 
+For this case, the mesh file is provided and may be download from [here](pb67.re2.gz).
+The provided file is zipped with the gzip utility and must be unzipped prior to use with
+
+```$ gunzip pb67.re2.gz```
+
+You should now have the mesh file ```pb67.re2```.
+The mesh includes over 110,000 hexahedral elements and has been generated using a Voronoi cell approach [!cite](lan2021).
+
 #### oudf file
+
+We will begin by setting up the ```.oudf``` file. 
+This file contains the setup for the required boundary conditions.
 
 !listing /htgr/pb67/pb67.oudf language=cpp
 
@@ -58,6 +69,11 @@ A cross section of the fluid domain is shown in [pb67geom] where the fluid is th
 !listing /htgr/pb67/nek.i
 
 ### MOOSE setup
+
+To setup the MOOSE mesh, a text file containing the center points of each pebble is necessary. 
+For the bed used in this case, the file can be obtained [here](/htgr/pb67/pb67_positions.txt).
+
+!listing /htgr/pb67/moose.i
 
 !listing /htgr/pb67/moose.i
 
